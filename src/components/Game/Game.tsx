@@ -8,12 +8,11 @@ import Lizard from '../../images/lizard.png';
 import Spock from '../../images/spock.png';
 
 const Game = () => {
-  const [player, setPlayer] = useState<number>();
-  const [cpu, setCpu] = useState<number>();
   const [results, setResults] = useState([0, 0, 0]);
+  const [player, setPlayer] = useState<number | string>('');
+  const [cpu, setCpu] = useState<number | string>('');
   const [toggleRules, setToggleRules] = useState(true);
   const [toggleGame, setToggleGame] = useState(false);
-  const [toggleStart, setToggleStart] = useState(true);
   const [toggleFight, setToggleFight] = useState(false);
 
   const cpuChoice = () => Math.floor(Math.random() * (5 - 1 + 1) + 1);
@@ -113,6 +112,31 @@ const Game = () => {
           </div>
         </div>
         )}
+        {toggleFight && (
+        <div className="fight">
+          <h2 className="fight__title result__title">{result()}</h2>
+          <div className="fight__line">
+            <div className="fight__icons">
+              <img src={playerPicture()} alt="YOU" width="300" />
+            </div>
+            <div className="fight__icons">
+              <img src={playerCpu()} alt="CPU" width="300" />
+            </div>
+          </div>
+          <button
+            className="button"
+            onClick={() => {
+              setPlayer(3);
+              setCpu(cpuChoice());
+              setToggleGame(true);
+              setToggleFight(false);
+              setResults(summery());
+            }}
+          >
+            Play
+          </button>
+        </div>
+        )}
         {toggleGame && (
         <div className="game">
           <div className="result">
@@ -129,27 +153,15 @@ const Game = () => {
               <h2 className="title__medium">{results[2]}</h2>
             </div>
           </div>
-          {toggleStart && <h2 className="start__title">Make Your choice!</h2>}
-          {toggleFight && (
-          <div className="fight">
-            <div className="fight__icons">
-              <img src={playerPicture()} alt="YOU" width="300" />
-            </div>
-            <div className="fight__icons">
-              <img src={playerCpu()} alt="CPU" width="300" />
-            </div>
-            <h2 className="fight__title">{result()}</h2>
-          </div>
-          )}
+          <h2 className="start__title">Make Your choice!</h2>
           <div className="buttons">
             <button
               className="button"
               onClick={() => {
                 setPlayer(1);
                 setCpu(cpuChoice());
-                setToggleStart(false);
                 setToggleFight(true);
-                setResults(summery());
+                setToggleGame(false);
               }}
             >
               <img src={Rock} alt="Rock" width="170" />
@@ -159,9 +171,8 @@ const Game = () => {
               onClick={() => {
                 setPlayer(2);
                 setCpu(cpuChoice());
-                setToggleStart(false);
                 setToggleFight(true);
-                setResults(summery());
+                setToggleGame(false);
               }}
             >
               <img src={Paper} alt="Paper" width="170" />
@@ -171,9 +182,8 @@ const Game = () => {
               onClick={() => {
                 setPlayer(3);
                 setCpu(cpuChoice());
-                setToggleStart(false);
                 setToggleFight(true);
-                setResults(summery());
+                setToggleGame(false);
               }}
             >
               <img src={Scissors} alt="Scissors" width="170" />
@@ -183,9 +193,8 @@ const Game = () => {
               onClick={() => {
                 setPlayer(4);
                 setCpu(cpuChoice());
-                setToggleStart(false);
                 setToggleFight(true);
-                setResults(summery());
+                setToggleGame(false);
               }}
             >
               <img src={Lizard} alt="Lizard" width="170" />
@@ -195,9 +204,8 @@ const Game = () => {
               onClick={() => {
                 setPlayer(5);
                 setCpu(cpuChoice());
-                setToggleStart(false);
                 setToggleFight(true);
-                setResults(summery());
+                setToggleGame(false);
               }}
             >
               <img src={Spock} alt="Spock" width="170" />
