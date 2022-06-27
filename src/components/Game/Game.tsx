@@ -7,6 +7,10 @@ import Scissors from '../../images/scissors.png';
 import Lizard from '../../images/lizard.png';
 import Spock from '../../images/spock.png';
 
+const cpuChoice = () => Math.floor(Math.random() * (5 - 1 + 1) + 1);
+
+const resultMessage = ['Congratulations! You win!', "It's a tie!", 'Sorry! You lose!'];
+
 const Game = () => {
   const [results, setResults] = useState([0, 0, 0]);
   const [player, setPlayer] = useState<number | string>('');
@@ -15,11 +19,7 @@ const Game = () => {
   const [toggleGame, setToggleGame] = useState(false);
   const [toggleFight, setToggleFight] = useState(false);
 
-  const cpuChoice = () => Math.floor(Math.random() * (5 - 1 + 1) + 1);
-
-  const resultMessage = ['Congratulations! You win!', "It's a tie!", 'Sorry! You lose!'];
-
-  const summery = () => {
+  const summary = () => {
     if (player === cpu) {
       return results.map((a, i) => (i === 1 ? a + 1 : a));
     } if (player === 1 && (cpu === 3 || cpu === 4)) {
@@ -130,7 +130,7 @@ const Game = () => {
               setCpu(cpuChoice());
               setToggleGame(true);
               setToggleFight(false);
-              setResults(summery());
+              setResults(summary());
             }}
           >
             Play
